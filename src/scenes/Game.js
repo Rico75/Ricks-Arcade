@@ -9,19 +9,62 @@ export class Game extends Scene
 
     create ()
     {
-        this.cameras.main.setBackgroundColor(0x00ff00);
+        this.cameras.main.setBackgroundColor(0x00efff);
 
+        let textHeight = 84;
+        let textStart = 400;
+
+        // this.add.image(512, 384, 'background').setAlpha(0.5);
         this.add.image(512, 384, 'background').setAlpha(0.5);
 
-        this.add.text(512, 384, 'Make something fun!\nand share it with us:\nsupport@phaser.io', {
+        const title = this.add.text(512, textHeight, 'Please select a game to start', {
             fontFamily: 'Arial Black', fontSize: 38, color: '#ffffff',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
         }).setOrigin(0.5);
 
-        this.input.once('pointerdown', () => {
+        /* make text interactive */
+        const group = this.add.group();
+        group.classType = Phaser.GameObjects.Text;
 
-            this.scene.start('GameOver');
+        const str = 'pacman';
+        const font = { fontFamily: 'Arial Black',
+            fontSize: 38,
+            color: '#bff619',
+            stroke: '#000000',
+            strokeThickness: 8,
+            align: 'center' };
+        const text = group.create(textStart, textHeight+100, str, font);
+        text.setInteractive(new Phaser.Geom.Rectangle(0, 0, text.width, text.height), Phaser.Geom.Rectangle.Contains);
+
+        const str1 = 'light cycles of death';
+        const font1 = { fontFamily: 'Arial Black',
+            fontSize: 38,
+            color: '#bff619',
+            stroke: '#000000',
+            strokeThickness: 8,
+            align: 'center' };
+        const text1 = group.create(textStart-125, textHeight+200, str1, font1);
+        text1.setInteractive(new Phaser.Geom.Rectangle(0, 0, text1.width, text1.height), Phaser.Geom.Rectangle.Contains);
+
+        this.input.on('gameobjectdown', (pointer, gameObject) =>
+        {
+
+           console.log('hello');
+            console.log('pointer',pointer);
+            console.log('gameObject',gameObject);
+            console.log('gameObject',gameObject.text);
+            switch (gameObject.text.toUpperCase()) {
+                case 'PACMAN':
+                    this.scene.start('Pacman');
+                    break;
+                case 'LIGHT CYCLES OF DEATH':
+                    this.scene.start('LightCycles');
+                    break;
+                default:
+                    this.scene.start('GameOver');
+                    break;
+                }
 
         });
     }
