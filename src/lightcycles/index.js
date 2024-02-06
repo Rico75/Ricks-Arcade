@@ -8,7 +8,7 @@ export const config = {
   type: Phaser.AUTO,
   parent: "phaser",
   width: 800,
-  height: 500,
+  height: 600,
   state: this,
   physics: {
     default: 'arcade',

@@ -20,6 +20,7 @@ class App {
 
 		this.updateInputValue = this.updateInputValue.bind(this);
 		this.setNumOfPlayers = this.setNumOfPlayers.bind(this);
+		console.log('App.js constructor',this);
 	}
 
 	setNumOfPlayers() {
@@ -61,7 +62,7 @@ class App {
 		h1.appendChild(input);
 		h1.appendChild(button);
 		div.appendChild(h1);
-
+console.log('App.js render',div);
 		return div;
 	}
 }
