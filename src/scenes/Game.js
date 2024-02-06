@@ -1,4 +1,5 @@
 import { Scene } from 'phaser';
+import App from "/src/lightcycles/components/App";
 
 export class Game extends Scene
 {
@@ -49,11 +50,6 @@ export class Game extends Scene
 
         this.input.on('gameobjectdown', (pointer, gameObject) =>
         {
-
-           console.log('hello');
-            console.log('pointer',pointer);
-            console.log('gameObject',gameObject);
-            console.log('gameObject',gameObject.text);
             switch (gameObject.text.toUpperCase()) {
                 case 'PACMAN':
                     this.scene.start('Pacman');
